@@ -130,7 +130,7 @@ ggplot(steps_day, aes(x=day, y=steps))+
 ## Warning: Ignoring unknown parameters: binwidth, bins, pad
 ```
 
-![](PA1_template_files/figure-html/Total number of steps per day plot-1.png)<!-- -->
+![](PA1_template_files/figure-html/Total_number_of_steps_per_day_plot-1.png)<!-- -->
 
 #### 3. Calculate and report the mean and median of the total number of steps taken per day
 
@@ -347,6 +347,4 @@ wmedian_diff <- 100 - (wmedian_weekday/wmedian_weekend)*100
 ```
 
 The mean number of steps during weekend was found to be 42.3660764 compared to 35.6102346during weekdays (i.e. 15.9463476 % higher).Also for the median which was 21.2268386 % higher during weekend (32.70375) compared with other weekdays (25.7617778). indecating that there is higher activity during the weekends.
-
-
 
