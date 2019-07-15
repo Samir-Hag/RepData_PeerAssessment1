@@ -27,7 +27,7 @@ The follwoings are the questions needed to be answered within this report:
 ## Loading and preprocessing the data
 The first step is to build the connection to the data site, downloaing,  unzipping the data files and assiging the data to *data*.
 
-```{r downloading data, echo=TRUE}
+```{r downloading_data, echo=TRUE}
 unzip("activity.zip")
 data <- read.csv("activity.csv")
 ```
@@ -36,7 +36,7 @@ data <- read.csv("activity.csv")
 ## What is mean total number of steps taken per day?
 recall libraries that will be used in this step.
 
-```{r calling packages, echo=TRUE}
+```{r calling_packages, echo=TRUE}
 library(lubridate)
 library(dplyr)
 ```
@@ -45,13 +45,13 @@ library(dplyr)
 #### 1. Calculate the total number of steps taken per day
 In order to calculate the steps taken per day, **Lubridate** package was used to split the dates into days, month and year using *mutate*. 
 
-```{r spliting dates in columns, echo=TRUE}
+```{r spliting_dates_in_columns, echo=TRUE}
 data <- data %>% mutate(year = year(date), month =month(date), day = day(date))
 ```
 
 the number of steps made per day was calculated using *aggregate* function and the results were assigned to **steps_day**.
 
-```{r calculating total number of steps per day, echo=TRUE}
+```{r calculating_total_number_of_steps_per_day, echo=TRUE}
 steps_day <- aggregate(steps~day, data, sum)
 ```
 
@@ -62,7 +62,7 @@ note: I am not sure whether plots like [this](https://github.com/FyzHsn/Reproduc
 
 
 
-```{r Total number of steps per day plot, echo=TRUE}
+```{r Total_number_of_steps_per_day_plot, echo=TRUE}
 
 library(ggplot2)
 ggplot(steps_day, aes(x=day, y=steps))+
