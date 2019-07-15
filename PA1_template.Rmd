@@ -62,8 +62,7 @@ note: I am not sure whether plots like [this](https://github.com/FyzHsn/Reproduc
 
 
 
-```{r,echo=TRUE}
-
+```{r}
 library(ggplot2)
 ggplot(steps_day, aes(x=day, y=steps))+
         geom_histogram(stat = "identity", fill = "darkblue")+
@@ -72,7 +71,6 @@ ggplot(steps_day, aes(x=day, y=steps))+
         xlab("Number of days")+
         ylab("Number of steps")+
         theme_bw()
-        
 ```
 
 #### 3. Calculate and report the mean and median of the total number of steps taken per day
