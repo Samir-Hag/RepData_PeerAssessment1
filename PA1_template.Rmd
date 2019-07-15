@@ -27,7 +27,7 @@ The follwoings are the questions needed to be answered within this report:
 ## Loading and preprocessing the data
 The first step is to build the connection to the data site, downloaing,  unzipping the data files and assiging the data to *data*.
 
-```{r downloading_data, echo=TRUE}
+```{r, echo=TRUE}
 unzip("activity.zip")
 data <- read.csv("activity.csv")
 ```
@@ -36,7 +36,7 @@ data <- read.csv("activity.csv")
 ## What is mean total number of steps taken per day?
 recall libraries that will be used in this step.
 
-```{r calling_packages, echo=TRUE}
+```{r, echo=TRUE}
 library(lubridate)
 library(dplyr)
 ```
@@ -45,13 +45,13 @@ library(dplyr)
 #### 1. Calculate the total number of steps taken per day
 In order to calculate the steps taken per day, **Lubridate** package was used to split the dates into days, month and year using *mutate*. 
 
-```{r spliting_dates_in_columns, echo=TRUE}
+```{r, echo=TRUE}
 data <- data %>% mutate(year = year(date), month =month(date), day = day(date))
 ```
 
 the number of steps made per day was calculated using *aggregate* function and the results were assigned to **steps_day**.
 
-```{r calculating_total_number_of_steps_per_day, echo=TRUE}
+```{r, echo=TRUE}
 steps_day <- aggregate(steps~day, data, sum)
 ```
 
@@ -62,7 +62,7 @@ note: I am not sure whether plots like [this](https://github.com/FyzHsn/Reproduc
 
 
 
-```{r Total_number_of_steps_per_day_plot, echo=TRUE}
+```{r, echo=TRUE}
 
 library(ggplot2)
 ggplot(steps_day, aes(x=day, y=steps))+
@@ -77,7 +77,7 @@ ggplot(steps_day, aes(x=day, y=steps))+
 
 #### 3. Calculate and report the mean and median of the total number of steps taken per day
 
-```{r calculating mean & median number of steps per day, echo=TRUE}
+```{r, echo=TRUE}
 smean <- mean(steps_day$steps)
 smedian <- median(steps_day$steps)
 ```
@@ -89,20 +89,20 @@ the *mean* of total number of steps per day was found to be `r smean`, while the
 
 in order to plot this data , first we need to calculate the average number of steps per interval
 
-```{r calculating the average number of steps per interval}
+```{r, echo=TRUE}
 steps_interval <- aggregate(steps~interval, data, mean)
 ```
 
 then plot a *time series* plot, where the number of intervals on the x-axis and the average number of steps on the y-axis.
 
-```{r Average number of steps per interval plot}
+```{r, echo=TRUE}
 plot(steps_interval$interval,steps_interval$steps, type ="l", xlab = "5-minute interval", ylab = "Average number of steps", main = "Average daily Activity Pattern")
 
 ```
 
 #### 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
-```{r calculating the interval with the max number of steps, echo=TRUE}
+```{r, echo=TRUE}
 interval_max <- steps_interval[which.max(steps_interval$steps), 1] #  1 refers to the interval with the maximum average step number
 ```
 
@@ -113,7 +113,7 @@ Tha 5-minute interval with the maximum number of steps was found to be `r interv
 #### 1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 
 
-```{r calculating the missing values, echo=TRUE}
+```{r, echo=TRUE}
 missing <- sum(is.na(data))
 missing_percent <- mean(is.na(data))*100
 ```
@@ -122,7 +122,7 @@ the total number of missing value in the data set was found to be `r missing`, w
 
 Another way to find and visualize missing data using **mice** package.
 
-```{r Number of missing values, echo=TRUE}
+```{r, echo=TRUE}
 library(mice)
 md.pattern(data)
 ```
@@ -133,7 +133,7 @@ According to this table, 2304 record are missing in the steps variable.
 
 There are a number of imputation techniques available,  here we are going to use **mean**  for missing values imputation for our dataset.
 
-```{r calculating mean steps, echo=TRUE}
+```{r, echo=TRUE}
 data_mean <- round(mean(data$steps, na.rm = TRUE), digits = 2)
 completdata_mean <- data
 ```
@@ -143,13 +143,13 @@ completdata_mean <- data
 
 replacing missing values with the calculated mean
 
-```{r repacing missing values with mean value, echo=TRUE}
+```{r, echo=TRUE}
 completdata_mean$steps[is.na(completdata_mean$steps)] <- data_mean
 ```
 
 checking whether there is any missing values in the new dataset
 
-```{r checking if whether there is missing values of steps, echo=TRUE}
+```{r, echo=TRUE}
 sum(is.na(completdata_mean))
 ```
 
@@ -158,7 +158,7 @@ similary, we can do the same for **median** , but we are not going to do it here
 #### 4.     Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
 
-```{r Number of steps per day -imputed ploting, echo=TRUE}
+```{r, echo=TRUE}
 steps_day_mean <- aggregate(steps~day, completdata_mean, sum)
 
 ggplot(steps_day_mean, aes(x=day, y=steps))+
@@ -170,7 +170,7 @@ ggplot(steps_day_mean, aes(x=day, y=steps))+
         theme_bw()
 ```
 
-```{r calculating mean & median steps per day for imputed data, echo=TRUE}
+```{r, echo=TRUE}
 smean_imputed <- mean(steps_day_mean$steps)
 smedian_imputed <- median(steps_day_mean$steps)
 mean_diff <- 100 - (smean/smean_imputed)*100
@@ -186,7 +186,7 @@ although the percentage of missing data represents `missing_percent` % of the ra
 
 In order to answer this question we need to creat a new data variable containg "weekday" and "weekend" as a day category.
 
-```{r calling lubridate + creat new variable dateCat, echo=TRUE}
+```{r, echo=TRUE}
 library(lubridate)
 completdata_mean$date <- ymd(completdata_mean$date)
 completdata_mean$weekday <- weekdays(completdata_mean$date)
@@ -195,21 +195,21 @@ completdata_mean$dayCat <- ifelse(completdata_mean$weekday %in% c("Saturday", "S
 
 Then subsetting the data into "weekday" and "weekend" datasets.
 
-```{r subsetting data into weekday & weekend datasets, echo=TRUE}
+```{r, echo=TRUE}
 weekday <- filter(completdata_mean, dayCat == "Weekday")
 weekend <- filter(completdata_mean, dayCat == "Weekend")
 ```
 
 then calculate number of steps per interval.
 
-```{r calculating number of steps/interval, echo=TRUE}
+```{r, echo=TRUE}
 steps_weekend <- aggregate(steps~interval, weekend, mean)
 steps_weekday <- aggregate(steps~interval, weekday, mean)
 ```
 
 and now we can creat the plots.
 
-```{r Number of steps per interval for weekday and weekend plot, echo=TRUE}
+```{r, echo=TRUE}
 par(mfrow = c(1, 2), oma = c(0, 0, 3, 1))
 plot(steps_weekday$interval,steps_weekday$steps, type ="l", xlab = "5-minute interval", ylab = "Average No. of steps",col = "blue", main = "Weekday Activity", cex.main = 1, cex.axis = 0.75)
 

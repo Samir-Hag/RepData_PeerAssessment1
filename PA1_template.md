@@ -130,7 +130,7 @@ ggplot(steps_day, aes(x=day, y=steps))+
 ## Warning: Ignoring unknown parameters: binwidth, bins, pad
 ```
 
-![](PA1_template_files/figure-html/Total_number_of_steps_per_day_plot-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 #### 3. Calculate and report the mean and median of the total number of steps taken per day
 
@@ -159,7 +159,7 @@ then plot a *time series* plot, where the number of intervals on the x-axis and 
 plot(steps_interval$interval,steps_interval$steps, type ="l", xlab = "5-minute interval", ylab = "Average number of steps", main = "Average daily Activity Pattern")
 ```
 
-![](PA1_template_files/figure-html/Average number of steps per interval plot-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 #### 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -213,7 +213,7 @@ library(mice)
 md.pattern(data)
 ```
 
-![](PA1_template_files/figure-html/Number of missing values-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 ```
 ##       date interval year month day steps     
@@ -277,7 +277,7 @@ ggplot(steps_day_mean, aes(x=day, y=steps))+
 ## Warning: Ignoring unknown parameters: binwidth, bins, pad
 ```
 
-![](PA1_template_files/figure-html/Number of steps per day -imputed ploting-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
 
 
 ```r
@@ -332,7 +332,7 @@ plot(steps_weekend$interval,steps_weekend$steps, type ="l", xlab = "5-minute int
 mtext("Average Steps Activity Pattern", side = 3, line = 0, outer = TRUE, cex = 1.5)
 ```
 
-![](PA1_template_files/figure-html/Number of steps per interval for weekday and weekend plot-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
 
 according to the figures, it is clearly that there is an increase in the nu,ber of steps during the weekends compared to normal weekdays. 
 
