@@ -29,7 +29,7 @@ The first step is to build the connection to the data site, downloaing,  unzippi
 
 
 ```r
-unzip("data.zip")
+unzip("activity.zip")
 data <- read.csv("activity.csv")
 ```
 

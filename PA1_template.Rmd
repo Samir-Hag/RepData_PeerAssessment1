@@ -3,7 +3,6 @@ title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
-    #self_contained: no
 ---
 ## Introduction:
 It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the quantified self movement a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.  
@@ -29,7 +28,7 @@ The follwoings are the questions needed to be answered within this report:
 The first step is to build the connection to the data site, downloaing,  unzipping the data files and assiging the data to *data*.
 
 ```{r downloading data, echo=TRUE}
-unzip("data.zip")
+unzip("activity.zip")
 data <- read.csv("activity.csv")
 ```
 
