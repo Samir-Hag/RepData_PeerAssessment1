@@ -232,4 +232,3 @@ wmedian_diff <- 100 - (wmedian_weekday/wmedian_weekend)*100
 The mean number of steps during weekend was found to be `r wmean_weekend` compared to `r wmean_weekday`during weekdays (i.e. `r wmean_diff` % higher).Also for the median which was `r wmedian_diff` % higher during weekend (`r wmedian_weekend`) compared with other weekdays (`r wmedian_weekday`). indecating that there is higher activity during the weekends.
 
 
-
